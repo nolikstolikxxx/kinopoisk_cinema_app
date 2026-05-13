@@ -11,10 +11,29 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+/**
+ * Hilt module responsible for providing
+ * application-level dependencies.
+ *
+ * Provides:
+ * - MovieRepository;
+ * - StaffRepository.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
+    // ================================
+    // Movie Repository
+    // ================================
+
+    /**
+     * Provides MovieRepository implementation.
+     *
+     * @param api Retrofit API service.
+     *
+     * @return MovieRepository implementation.
+     */
     @Provides
     @Singleton
     fun providesMovieRepository(
@@ -23,6 +42,17 @@ class AppModule {
         return MovieRepositoryImpl(api)
     }
 
+    // ================================
+    // Staff Repository
+    // ================================
+
+    /**
+     * Provides StaffRepository implementation.
+     *
+     * @param api Retrofit API service.
+     *
+     * @return StaffRepository implementation.
+     */
     @Provides
     @Singleton
     fun providesStaffRepository(
