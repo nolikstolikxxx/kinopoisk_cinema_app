@@ -36,86 +36,103 @@ fun Onboarding(modifier: Modifier = Modifier) {
             .background(color = Color.White)
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(151.dp, Alignment.Start),
-            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(151.dp , Alignment.Start) ,
+            verticalAlignment = Alignment.CenterVertically ,
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 26.dp,
-                    y = 80.dp)
+                .offset(
+                    x = 26.dp ,
+                    y = 80.dp
+                )
                 .requiredWidth(width = 308.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.vector),
-                contentDescription = "Vector",
+                painter = painterResource(id = R.drawable.vector) ,
+                contentDescription = "Vector" ,
                 modifier = Modifier
                     .requiredWidth(width = 120.dp)
-                    .requiredHeight(height = 18.dp))
-            StatusGhostStateDisabledSizesmallIconnoLabeliconno()
+                    .requiredHeight(height = 18.dp)
+            )
+            StatusGhostStateDisabledSizeSmallIconNoLabelIconNo()
         }
         Image(
-            painter = painterResource(id = R.drawable.onboarding1),
-            contentDescription = "wfh_4 1",
+            painter = painterResource(id = R.drawable.onboarding1) ,
+            contentDescription = "wfh_4 1" ,
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 0.dp,
-                    y = 265.dp)
+                .offset(
+                    x = 0.dp ,
+                    y = 265.dp
+                )
                 .requiredWidth(width = 360.dp)
-                .requiredHeight(height = 270.dp))
+                .requiredHeight(height = 270.dp)
+        )
         Text(
-            text = "Узнавай о премьерах",
-            color = Color(0xff272727),
+            text = "Узнавай о премьерах" ,
+            color = Color(0xff272727) ,
             style = TextStyle(
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Medium),
+                fontSize = 32.sp ,
+                fontWeight = FontWeight.Medium
+            ) ,
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 26.dp,
-                    y = 602.24.dp))
+                .offset(
+                    x = 26.dp ,
+                    y = 602.24.dp
+                )
+        )
         Row(
-            horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.Start),
+            horizontalArrangement = Arrangement.spacedBy(4.dp , Alignment.Start) ,
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 26.dp,
-                    y = 728.24.dp)
+                .offset(
+                    x = 26.dp ,
+                    y = 728.24.dp
+                )
         ) {
             Box(
                 modifier = Modifier
                     .requiredSize(size = 8.dp)
                     .clip(shape = CircleShape)
-                    .background(color = Color(0xff121616)))
+                    .background(color = Color(0xff121616))
+            )
             Box(
                 modifier = Modifier
                     .requiredSize(size = 8.dp)
                     .clip(shape = CircleShape)
-                    .background(color = Color(0xffd9d9d9)))
+                    .background(color = Color(0xffd9d9d9))
+            )
             Box(
                 modifier = Modifier
                     .requiredSize(size = 8.dp)
                     .clip(shape = CircleShape)
-                    .background(color = Color(0xffd9d9d9)))
+                    .background(color = Color(0xffd9d9d9))
+            )
         }
     }
 }
 
 @Composable
-fun StatusGhostStateDisabledSizesmallIconnoLabeliconno(modifier: Modifier = Modifier) {
+fun StatusGhostStateDisabledSizeSmallIconNoLabelIconNo(modifier: Modifier = Modifier) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.End),
-        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp , Alignment.End) ,
+        verticalAlignment = Alignment.CenterVertically ,
         modifier = modifier
             .clip(shape = RoundedCornerShape(56.dp))
     ) {
         Text(
-            text = "Пропустить",
-            color = Color(0xffb5b5c9),
-            textAlign = TextAlign.Center,
+            text = "Пропустить" ,
+            color = Color(0xffb5b5c9) ,
+            textAlign = TextAlign.Center ,
             style = TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium))
+                fontSize = 14.sp ,
+                fontWeight = FontWeight.Medium
+            )
+        )
     }
 }
 
-@Preview(widthDp = 360, heightDp = 800)
+@Preview(widthDp = 360 , heightDp = 800)
 @Composable
 private fun OnboardingPreview() {
     Onboarding(Modifier)

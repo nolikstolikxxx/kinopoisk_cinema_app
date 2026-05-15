@@ -90,6 +90,19 @@ interface KinopoiskApi {
     ): List<Actors>
 
     /**
+     * Loads actor details by ID.
+     *
+     * @param id Actor identifier.
+     *
+     * @return Actors object.
+     */
+    @GET("/api/v1/staff/{id}")
+    @Headers("X-API-KEY: ${Constants.APIKEY}")
+    suspend fun getActorsById(
+        @Path("id") id: Int
+    ): Actors
+
+    /**
      * Loads detailed information about staff member.
      *
      * @param id Staff member identifier.

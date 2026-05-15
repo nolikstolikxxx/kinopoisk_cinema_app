@@ -125,7 +125,7 @@ fun StaffFilmographyScreen(
                 modifier = Modifier
                     .padding(top = 24.dp)
             ) {
-                items(state.movies.get(state.professionKey)!!) { movie ->
+                items(state.movies[state.professionKey]!!) { movie ->
                     FilmographyMovie(movie = movie , navController = navController)
                 }
             }

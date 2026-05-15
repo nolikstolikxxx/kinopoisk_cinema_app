@@ -8,14 +8,30 @@ import com.example.kinopoiskCinemaApp.presentation.onboarding.OnboardingScreen
 import com.example.kinopoiskCinemaApp.presentation.ui.theme.KinopoiskSkillCinemaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Main entry point of the application.
+ *
+ * Responsible for:
+ * - Initial application setup;
+ * - Launching onboarding flow;
+ * - Launching main application screen.
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    // ================================
+    // Activity Lifecycle
+    // ================================
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             KinopoiskSkillCinemaTheme {
+
+                /**
+                 * Launch onboarding screen first.
+                 */
                 OnboardingScreen {
                     startMainScreen()
                 }
@@ -23,6 +39,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    // ================================
+    // Navigation
+    // ================================
+
+    /**
+     * Opens main application screen
+     * after onboarding is completed.
+     */
     private fun startMainScreen() {
         setContent {
             KinopoiskSkillCinemaTheme {

@@ -96,7 +96,7 @@ fun GalleryPageScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
 
-                val image = state.gallary
+                val image = state.gallery
                 if (image != null) {
                     items(image.items) { gallery ->
                         GalleryItem(

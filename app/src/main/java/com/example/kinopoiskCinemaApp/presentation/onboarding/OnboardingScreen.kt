@@ -33,21 +33,23 @@ import com.example.kinopoiskCinemaApp.presentation.ui.theme.KinopoiskSkillCinema
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(onComplete: () -> Unit) {
-    val pagerState = rememberPagerState(initialPage = 0, pageCount = {3})
+    val pagerState = rememberPagerState(initialPage = 0 , pageCount = { 3 })
     Scaffold(
-        modifier = Modifier.fillMaxSize().padding(vertical = 26.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 26.dp) ,
         topBar = {
             TopAppBar(
-                title = { Text(text = "Skillcinema") },
+                title = { Text(text = "Skillcinema") } ,
                 actions = {
                     TextButton(onClick = {
                         onComplete()
                     }) {
-                        Text(text = "Пропустить", color = Color.Gray)
+                        Text(text = "Пропустить" , color = Color.Gray)
                     }
                 }
             )
-        },
+        } ,
         content = { padding ->
             Column(
                 modifier = Modifier
@@ -55,30 +57,32 @@ fun OnboardingScreen(onComplete: () -> Unit) {
                     .padding(padding)
             ) {
                 HorizontalPager(
-                    state = pagerState,
+                    state = pagerState ,
                     modifier = Modifier.weight(1f)
                 ) { page ->
                     when (page) {
                         0 -> OnboardingPage(
-                            imageRes = R.drawable.onboarding1,
+                            imageRes = R.drawable.onboarding1 ,
                             title = "Узнавай о премьерах"
                         )
+
                         1 -> OnboardingPage(
-                            imageRes = R.drawable.onboarding2,
+                            imageRes = R.drawable.onboarding2 ,
                             title = "Создавай коллекции"
                         )
+
                         2 -> OnboardingPage(
-                            imageRes = R.drawable.onboarding3,
+                            imageRes = R.drawable.onboarding3 ,
                             title = "Делись с друзьями"
                         )
                     }
                 }
                 PageIndicator(
-                    currentPage = pagerState.currentPage,
-                    pageCount = 3,
+                    currentPage = pagerState.currentPage ,
+                    pageCount = 3 ,
                     modifier = Modifier
                         .align(Alignment.Start)
-                        .padding(bottom = 63.dp, start = 26.dp )
+                        .padding(bottom = 63.dp , start = 26.dp)
                 )
             }
         }
@@ -86,24 +90,24 @@ fun OnboardingScreen(onComplete: () -> Unit) {
 }
 
 @Composable
-fun OnboardingPage(imageRes: Int, title: String) {
+fun OnboardingPage(imageRes: Int , title: String) {
     Column(
         modifier = Modifier
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .fillMaxSize() ,
+        horizontalAlignment = Alignment.CenterHorizontally ,
     ) {
         Image(
             painter = painterResource(id = imageRes) ,
-            contentDescription = null,
+            contentDescription = null ,
             modifier = Modifier
                 .weight(1f)
         )
         Text(
-            text = title,
+            text = title ,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 56.dp, start = 26.dp),
-            fontSize = 32.sp,
+                .padding(bottom = 56.dp , start = 26.dp) ,
+            fontSize = 32.sp ,
             textAlign = TextAlign.Start
 
 
@@ -120,9 +124,9 @@ fun OnboardingScreenPreview() {
 }
 
 @Composable
-fun PageIndicator(currentPage: Int, pageCount: Int, modifier: Modifier = Modifier) {
+fun PageIndicator(currentPage: Int , pageCount: Int , modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier,
+        modifier = modifier ,
         horizontalArrangement = Arrangement.Center
     ) {
         repeat(pageCount) { index ->
@@ -131,7 +135,7 @@ fun PageIndicator(currentPage: Int, pageCount: Int, modifier: Modifier = Modifie
                 modifier = Modifier
                     .padding(4.dp)
                     .size(12.dp)
-                    .background(color, shape = CircleShape)
+                    .background(color , shape = CircleShape)
             )
         }
     }

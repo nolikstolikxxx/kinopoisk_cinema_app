@@ -35,26 +35,26 @@ import com.example.kinopoiskCinemaApp.presentation.components.MovieItem
 fun StaffDetailMoviesScreen(
     navController: NavController ,
     staffDetailMovieViewModel: StaffDetailMovieViewModel = hiltViewModel()
-){
+) {
 
     val state by staffDetailMovieViewModel.state.collectAsState()
 
-    Box (
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
 
-        if ( state.isLoading ) {
+        if (state.isLoading) {
 
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
             )
 
-        } else if ( state.error.isNotBlank() ) {
+        } else if (state.error.isNotBlank()) {
 
             Text(
-                text = state.error,
+                text = state.error ,
                 modifier = Modifier
                     .align(Alignment.Center)
             )
@@ -62,49 +62,52 @@ fun StaffDetailMoviesScreen(
         } else {
 
             Column {
-                Box (
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
                     IconButton(
-                        onClick = { navController.popBackStack() },
+                        onClick = { navController.popBackStack() } ,
                         modifier = Modifier
                             .background(Color.Transparent)
                     ) {
-                        Icon (
+                        Icon(
                             painter = painterResource(id = R.drawable.ic_back) ,
-                            contentDescription = "Back icon",
+                            contentDescription = "Back icon" ,
                         )
                     }
 
                     Text(
                         modifier = Modifier
-                            .align(Alignment.Center),
-                        text = state.staffName + ": Лучшее",
+                            .align(Alignment.Center) ,
+                        text = state.staffName + ": Лучшее" ,
                         style = TextStyle(
-                            fontWeight = FontWeight.W600,
-                            fontSize = 12.sp,
-                            lineHeight = 13.2.sp,
+                            fontWeight = FontWeight.W600 ,
+                            fontSize = 12.sp ,
+                            lineHeight = 13.2.sp ,
                             color = Color(0xFF272727)
                         )
                     )
                 }
 
-                LazyVerticalGrid (
-                    columns = GridCells.Fixed(2),
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2) ,
                     modifier = Modifier
                         .fillMaxHeight()
                         .padding(
-                            start = 61.dp,
+                            start = 61.dp ,
                             end = 61.dp
-                        ),
-                    horizontalArrangement = Arrangement.Center,
+                        ) ,
+                    horizontalArrangement = Arrangement.Center ,
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(state.staffMovies) { movie ->
                         MovieItem(
-                            movie = movie,
-                            onItemClick = { navController.navigate("detailMovie/${movie.kinopoiskId}}") }
+                            movie = movie ,
+                            onItemClick = {
+                                navController
+                                    .navigate("detailMovie/${movie.kinopoiskId}}")
+                            }
                         )
                     }
                 }

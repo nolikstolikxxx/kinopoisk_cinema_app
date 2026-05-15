@@ -13,16 +13,44 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
 
+/**
+ * ViewModel responsible for staff details screen.
+ *
+ * Handles:
+ * - Loading staff information;
+ * - Loading movies related to selected staff member;
+ * - Managing UI state.
+ */
 @HiltViewModel
 class StaffDetailViewModel @Inject constructor(
+
+    /**
+     * UseCase for movie-related operations.
+     */
     private val movieUseCase: MovieUseCase ,
+
+    /**
+     * UseCase for staff-related operations.
+     */
     private val staffUseCase: StaffUseCase ,
+
+    /**
+     * Saved state containing navigation arguments.
+     */
     savedStateHandle: SavedStateHandle ,
-): ViewModel() {
+
+    ) : ViewModel() {
+
+    // ================================
+    // Screen State
+    // ================================
 
     private val _state = MutableStateFlow(StaffDetailState())
     val state: StateFlow<StaffDetailState> = _state
 
+    // ================================
+    // Initialization
+    // ================================
 
     init {
         val id: Int? = savedStateHandle.get<String>("staffId")?.toInt()
@@ -32,23 +60,40 @@ class StaffDetailViewModel @Inject constructor(
         }
     }
 
+    // ================================
+    // Staff Details
+    // ================================
+
+    /**
+     * Loads detailed information
+     * about selected staff member.
+     *
+     * Also loads a preview list
+     * of staff-related movies.
+     *
+     * @param id Staff identifier.
+     */
     private fun getStaffDetails(id: Int) {
         viewModelScope.launch {
 
             _state.value = StaffDetailState(isLoading = true)
 
             try {
-                var staff = staffUseCase.getStuffDetailsById(id)
+                val staff = staffUseCase.getStuffDetailsById(id)
                 val staffMovies = mutableListOf<Movie>()
 
+                /**
+                 * Loads first 7 movies
+                 * related to selected staff member.
+                 */
                 for (film in staff.films.take(7)) {
-                    var mov = movieUseCase.getFilmById(film.filmId)
+                    val mov = movieUseCase.getFilmById(film.filmId)
                     staffMovies.add(mov)
                 }
 
                 _state.value = StaffDetailState(
-                    staff = staff,
-                    staffMovies = staffMovies,
+                    staff = staff ,
+                    staffMovies = staffMovies ,
                 )
 
             } catch (e: HttpException) {

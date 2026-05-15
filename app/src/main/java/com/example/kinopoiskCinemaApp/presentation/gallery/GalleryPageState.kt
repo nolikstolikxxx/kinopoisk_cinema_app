@@ -4,7 +4,7 @@ import com.example.kinopoiskCinemaApp.domain.model.Images
 
 data class GalleryPageState (
     var isLoading: Boolean = false ,
-    var gallary: Images? = null ,
+    var gallery: Images? = null ,
     var error: String = "" ,
     var id: Int? = 0
 )

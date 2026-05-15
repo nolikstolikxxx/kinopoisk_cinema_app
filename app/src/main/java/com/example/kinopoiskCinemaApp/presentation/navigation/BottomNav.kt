@@ -23,16 +23,16 @@ fun BottomNav(
     navController: NavController
 ) {
     val screenList = listOf(
-        BottomNavItem.Homepage,
-        BottomNavItem.Search,
+        BottomNavItem.Homepage ,
+        BottomNavItem.Search ,
         BottomNavItem.Profile
     )
 
     NavigationBar(
         modifier = Modifier
-            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+            .clip(RoundedCornerShape(topStart = 16.dp , topEnd = 16.dp))
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White) ,
         containerColor = Color.White
     ) {
         val backStackEntry by navController.currentBackStackEntryAsState()
@@ -41,24 +41,24 @@ fun BottomNav(
         screenList.forEach { item ->
             NavigationBarItem(
                 modifier = Modifier
-                    .background(Color.White),
-                selected = currentRoute == item.route,
+                    .background(Color.White) ,
+                selected = currentRoute == item.route ,
                 onClick = {
                     navController.navigate(item.route)
-                },
+                } ,
                 icon = {
                     Icon(
                         painter = painterResource(item.iconId) ,
-                        contentDescription = "icon",
+                        contentDescription = "icon" ,
                         modifier = Modifier
                             .size(18.dp)
                     )
-                },
+                } ,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = Color(0xFF3D3BFF) ,
                     unselectedIconColor = Color(0xFF272727) ,
-                    selectedTextColor = Color.White,
-                    unselectedTextColor = Color.White,
+                    selectedTextColor = Color.White ,
+                    unselectedTextColor = Color.White ,
                     indicatorColor = Color.White
                 )
             )

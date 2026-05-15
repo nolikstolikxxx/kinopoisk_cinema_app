@@ -13,11 +13,11 @@ plugins {
 
 android {
     namespace = "com.example.kinopoiskCinemaApp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.kinopoiskCinemaApp"
-        minSdk = 25
+        minSdk = 26
         //noinspection OldTargetApi,ExpiredTargetSdkVersion
         targetSdk = 33
         versionCode = 1
@@ -44,35 +44,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlin {
+        jvmToolchain(17)
+    }
+    ksp {
+        arg("room.schemaLocation" , "$projectDir/schema")
     }
 
-    /*kotlin {
-        //mingwX64()
-        //android()
-        //jvm() // Declares a JVM target
-        *//*sourceSets {
-            val desktopMain by creating {
-                dependsOn(commonMain.get() as KotlinSourceSet)
-            }
-            mingwX64Main.get().dependsOn(desktopMain)
-        }*//*
-        compilerOptions {
-            // Set up the Kotlin compiler options for the 'main' compilation:
-            jvmTarget.set(JvmTarget.JVM_1_8)
-            freeCompilerArgs.add("-Xcontext-parameters")
-            freeCompilerArgs.add("-Xcontext-sensitive-resolution")
-            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
-            freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
-        }
-        //compileKotlinTask
-
-        // Configure all compilations of all targets:
-        compilerOptions {
-            allWarningsAsErrors.set(true)
-        }
-    }*/
 
     buildFeatures {
         viewBinding = true

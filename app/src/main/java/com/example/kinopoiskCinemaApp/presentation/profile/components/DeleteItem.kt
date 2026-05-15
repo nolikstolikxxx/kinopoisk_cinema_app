@@ -26,44 +26,44 @@ import com.example.kinopoiskCinemaApp.R
 @Composable
 fun DeleteItem(
     onItemClick: () -> Unit
-){
+) {
     Box(
         modifier = Modifier
             .width(111.dp)
             .height(194.dp)
             .background(
-                color = Color.White,
+                color = Color.White ,
                 shape = RoundedCornerShape(22.dp)
             )
-            .clickable { onItemClick() },
+            .clickable { onItemClick() } ,
         contentAlignment = Alignment.Center
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally ,
         ) {
             Box(
                 modifier = Modifier
                     .size(40.dp)
                     .background(
-                        color = Color.White,
+                        color = Color.White ,
                         shape = CircleShape
-                    ),
+                    ) ,
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_trash) ,
-                    contentDescription = null,
+                    contentDescription = null ,
                     tint = Color.Unspecified
                 )
             }
 
             Text(
-                text = "Очистить\nисторию",
-                textAlign = TextAlign.Center,
+                text = "Очистить\nисторию" ,
+                textAlign = TextAlign.Center ,
                 color = Color(0xFF272727) ,
                 style = TextStyle(
-                    fontWeight = FontWeight.W400,
-                    fontSize = 12.sp,
+                    fontWeight = FontWeight.W400 ,
+                    fontSize = 12.sp ,
                     lineHeight = 13.2.sp
                 )
             )

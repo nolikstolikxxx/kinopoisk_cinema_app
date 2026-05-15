@@ -16,7 +16,7 @@ fun Search() {
             .fillMaxSize()
             .wrapContentHeight()
             .background(Color.White),
-        text = "Search",
+        text = NavigationRoutes.SEARCH,
         textAlign = TextAlign.Center
     )
 }

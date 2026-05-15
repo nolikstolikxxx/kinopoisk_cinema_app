@@ -37,7 +37,7 @@ fun FilmPageScreen(
     val stateMovie by movieViewModel.stateMovie.collectAsState()
     val stateActor by movieViewModel.stateActors.collectAsState()
     val stateImage by movieViewModel.stateGallery.collectAsState()
-    val statesimilarMovie by movieViewModel.stateSimilarFilm.collectAsState()
+    val stateSimilarMovie by movieViewModel.stateSimilarFilm.collectAsState()
     val isWatched by movieViewModel.isWatched.collectAsState()
 
     if (stateMovie.isLoading) {
@@ -121,13 +121,20 @@ fun FilmPageScreen(
                                     directors.add(actor)
                                 }
                             }
-                            ActorsList(stuffs , "В фильме снимались" , 4 , navController)
-                            ActorsList(directors , "Над фильмом работали" , 2 , navController)
+                            ActorsList(
+                                stuffs ,
+                                "В фильме снимались" ,
+                                4 ,
+                                navController
+                            )
+                            ActorsList(
+                                directors ,
+                                "Над фильмом работали" ,
+                                2 ,
+                                navController
+                            )
 
                         }
-
-
-
 
                         if (stateImage.isLoading) {
 
@@ -156,29 +163,28 @@ fun FilmPageScreen(
 
                         }
 
-                        if (statesimilarMovie.isLoading) {
+                        if (stateSimilarMovie.isLoading) {
 
                             CircularProgressIndicator(
                                 modifier = Modifier
                             )
 
-                        } else if (statesimilarMovie.error.isNotBlank()) {
+                        } else if (stateSimilarMovie.error.isNotBlank()) {
 
                             Text(
-                                text = statesimilarMovie.error ,
+                                text = stateSimilarMovie.error ,
                                 modifier = Modifier
 
                             )
 
                         } else {
-                            val similarMovies = statesimilarMovie.movies
+                            val similarMovies = stateSimilarMovie.movies
                             if (similarMovies != null) {
                                 SimilarFilmsListItem(
                                     similar = similarMovies.items ,
                                     navController = navController
                                 )
                             }
-
                         }
                     }
                 }

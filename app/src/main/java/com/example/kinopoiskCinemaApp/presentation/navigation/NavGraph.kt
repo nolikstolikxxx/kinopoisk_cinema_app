@@ -14,56 +14,114 @@ import com.example.kinopoiskCinemaApp.presentation.staff_detail.StaffDetailScree
 import com.example.kinopoiskCinemaApp.presentation.staff_detail_movie.StaffDetailMoviesScreen
 import com.example.kinopoiskCinemaApp.presentation.staff_filmography.StaffFilmographyScreen
 
+/**
+ * Main navigation graph of the application.
+ *
+ * Contains all application destinations
+ * and navigation routes.
+ */
 @Composable
 fun NavGraph(
+
+    /**
+     * Main navigation controller.
+     */
     navHostController: NavHostController
 ) {
+    // ================================
+    // Navigation Host
+    // ================================
+
     NavHost(
-        navController = navHostController, startDestination = "homepage"
-    ) { //todo: change to constants
-        composable("homepage") {
+        navController = navHostController ,
+        /**
+         * Start destination of the application.
+         */
+        startDestination = NavigationRoutes.HOME
+    ) {
+
+        // ================================
+        // Home Screen
+        // ================================
+
+        composable(NavigationRoutes.HOME) {
             HomePageScreen(navController = navHostController)
         }
 
-        composable("search") {
+        // ================================
+        // Search Screen
+        // ================================
+
+        composable(NavigationRoutes.SEARCH) {
             Search()
         }
 
-        composable("profile") {
+        // ================================
+        // Profile Screen
+        // ================================
+
+        composable(NavigationRoutes.PROFILE) {
             ProfileScreen(
                 navController = navHostController
             )
         }
 
-        composable ( "watchedMovies" ) {
+        // ================================
+        // Watched Movies Screen
+        // ================================
+
+        composable(NavigationRoutes.WATCHED_MOVIES) {
             WatchedMoviesScreen(
                 navController = navHostController
             )
         }
 
-        composable("movieCollection/{type}") { backStackEntry ->
+        // ================================
+        // Movie Collection Screen
+        // ================================
+
+        composable(NavigationRoutes.MOVIE_COLLECTION) {
             MovieCollectionScreen(navController = navHostController)
         }
 
-        composable("staffDetails/{staffId}") {
+        // ================================
+        // Staff Details Screen
+        // ================================
+
+        composable(NavigationRoutes.STAFF_DETAILS) {
             StaffDetailScreen(navController = navHostController)
         }
 
-        composable("staffDetailsMovies/{staffId}") {
+        // ================================
+        // Staff Movies Screen
+        // ================================
+
+        composable(NavigationRoutes.STAFF_DETAILS_MOVIES) {
             StaffDetailMoviesScreen(navController = navHostController)
         }
 
-        composable("staffFilmography/{staffId}") {
+        // ================================
+        // Staff Filmography Screen
+        // ================================
+
+        composable(NavigationRoutes.STAFF_FILMOGRAPHY) {
             StaffFilmographyScreen(navController = navHostController)
         }
 
-        composable("detailMovie/{id}"){
+        // ================================
+        // Movie Details Screen
+        // ================================
+
+        composable(NavigationRoutes.DETAIL_MOVIE) {
             FilmPageScreen(navController = navHostController)
         }
 
-        composable("galleryPage/{id}"){
+        // ================================
+        // Gallery Screen
+        // ================================
+
+        composable(NavigationRoutes.GALLERY_PAGE) {
             GalleryPageScreen(navController = navHostController)
         }
-
     }
 }

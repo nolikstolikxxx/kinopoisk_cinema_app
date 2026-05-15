@@ -23,14 +23,14 @@ import androidx.navigation.compose.rememberNavController
 fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
-        modifier = Modifier.background(Color.White),
+        modifier = Modifier.background(Color.White) ,
         bottomBar = {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .shadow(
-                        elevation = 20.dp,
-                        shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp) ,
+                        elevation = 20.dp ,
+                        shape = RoundedCornerShape(topStart = 16.dp , topEnd = 16.dp) ,
                     )
                     .background(Color.White)
             ) {
@@ -40,15 +40,15 @@ fun MainScreen() {
                 ) {
                     BottomAppBar(
                         modifier = Modifier
-                            .wrapContentSize(),
-                        containerColor = Color.White,
+                            .wrapContentSize() ,
+                        containerColor = Color.White ,
 
                         ) {
                         BottomNav(navController = navController)
                     }
                 }
             }
-        },
+        } ,
     ) {
         NavGraph(navHostController = navController)
     }

@@ -19,32 +19,78 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
 
+/**
+ * ViewModel responsible for movie details screen.
+ *
+ * Handles:
+ * - Loading detailed movie information;
+ * - Loading actors;
+ * - Loading gallery images;
+ * - Loading similar movies;
+ * - Managing watched movies history.
+ */
 @HiltViewModel
 class FilmPageViewModel @Inject constructor(
-    private val movieUseCase: MovieUseCase ,
-    private val watchedMovieDao: WatchedMovieDao ,
-    savedStateHandle: SavedStateHandle
-): ViewModel() {
 
-    private val _stateMovie =  MutableStateFlow<FilmPageState>(FilmPageState())
+    /**
+     * UseCase for movie-related operations.
+     */
+    private val movieUseCase: MovieUseCase ,
+
+    /**
+     * DAO for watched movies history.
+     */
+    private val watchedMovieDao: WatchedMovieDao ,
+
+    /**
+     * Saved state containing navigation arguments.
+     */
+    savedStateHandle: SavedStateHandle
+
+) : ViewModel() {
+
+    // ================================
+    // Movie State
+    // ================================
+
+    private val _stateMovie = MutableStateFlow(FilmPageState())
     val stateMovie: StateFlow<FilmPageState> = _stateMovie
 
-    private val _stateActors =  MutableStateFlow<ActorsState>(ActorsState())
+    // ================================
+    // Actors State
+    // ================================
+
+    private val _stateActors = MutableStateFlow(ActorsState())
     val stateActors: StateFlow<ActorsState> = _stateActors
 
-    private val _stateGallery =  MutableStateFlow<GalleryState>(GalleryState())
+    // ================================
+    // Gallery State
+    // ================================
+
+    private val _stateGallery = MutableStateFlow(GalleryState())
     val stateGallery: StateFlow<GalleryState> = _stateGallery
 
-    private val _stateSimilarFilm =  MutableStateFlow<SimilarFilmState>(SimilarFilmState())
+    // ================================
+    // Similar Movies State
+    // ================================
+
+    private val _stateSimilarFilm = MutableStateFlow(SimilarFilmState())
     val stateSimilarFilm: StateFlow<SimilarFilmState> = _stateSimilarFilm
+
+    // ================================
+    // Watched State
+    // ================================
 
     private val _isWatched = MutableStateFlow(false)
     val isWatched: StateFlow<Boolean> = _isWatched
 
+    // ================================
+    // Initialization
+    // ================================
+
     init {
         val id: Int? = savedStateHandle.get<String>("id")?.toInt()
-        Log.d("id", id.toString())
-
+        Log.d("id" , id.toString())
 
         if (id != null) {
             getMovieById(id)
@@ -54,110 +100,162 @@ class FilmPageViewModel @Inject constructor(
         }
     }
 
-    fun getMovieById(id: Int){
+    // ================================
+    // Movie Details
+    // ================================
+
+    /**
+     * Loads detailed movie information.
+     *
+     * Also checks whether movie exists
+     * in watched history.
+     *
+     * @param id Movie identifier.
+     */
+    fun getMovieById(id: Int) {
 
         viewModelScope.launch {
             _stateMovie.value = _stateMovie.value.copy(isLoading = true)
 
             try {
-                var movie = movieUseCase.getDetailFilm(id)
+                val movie = movieUseCase.getDetailFilm(id)
 
                 _isWatched.value = watchedMovieDao.getMovieById(id) != null
                 _stateMovie.value = _stateMovie.value.copy(
-                    isLoading = false,
-                    movie = movie,
+                    isLoading = false ,
+                    movie = movie ,
                 )
             } catch (e: HttpException) {
                 _stateMovie.value = _stateMovie.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
                 )
             }
         }
     }
 
-    fun getActors(id: Int){
+    // ================================
+    // Actors
+    // ================================
+
+    /**
+     * Loads actors list for selected movie.
+     *
+     * @param id Movie identifier.
+     */
+    fun getActors(id: Int) {
         viewModelScope.launch {
             _stateActors.value = _stateActors.value.copy(isLoading = true)
 
             try {
-                var actors = movieUseCase.getActors(id)
+                val actors = movieUseCase.getActors(id)
 
                 _stateActors.value = _stateActors.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     actor = actors
                 )
             } catch (e: HttpException) {
                 _stateActors.value = _stateActors.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
                 )
             }
         }
     }
 
-    fun getGallery(id: Int){
+    // ================================
+    // Gallery
+    // ================================
+
+    /**
+     * Loads gallery images for selected movie.
+     *
+     * @param id Movie identifier.
+     */
+    fun getGallery(id: Int) {
         viewModelScope.launch {
             _stateGallery.value = _stateGallery.value.copy(isLoading = true)
 
             try {
-                var gallery = movieUseCase.getImages(id)
+                val gallery = movieUseCase.getImages(id)
 
                 _stateGallery.value = _stateGallery.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     gallary = gallery
                 )
             } catch (e: HttpException) {
                 _stateGallery.value = _stateGallery.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
                 )
             }
         }
     }
 
-    fun getSimilarMovies(id: Int){
+    // ================================
+    // Similar Movies
+    // ================================
+
+    /**
+     * Loads movies similar to selected movie.
+     *
+     * @param id Movie identifier.
+     */
+    fun getSimilarMovies(id: Int) {
         viewModelScope.launch {
             _stateSimilarFilm.value = _stateSimilarFilm.value.copy(isLoading = true)
 
             try {
-                var movie = movieUseCase.getSimilarMovies(id)
+                val movie = movieUseCase.getSimilarMovies(id)
 
                 _stateSimilarFilm.value = _stateSimilarFilm.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     movies = movie
                 )
             } catch (e: HttpException) {
                 _stateSimilarFilm.value = _stateSimilarFilm.value.copy(
-                    isLoading = false,
+                    isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
                 )
             }
         }
     }
 
+    // ================================
+    // Watched Movies
+    // ================================
+
+    /**
+     * Adds movie to watched history.
+     *
+     * @param movie Detailed movie object.
+     */
     fun insertMovieToWatched(movie: DetailMovie) {
         viewModelScope.launch {
-            var watchedMovie = WatchedMovie(
-                movieId = movie.kinopoiskId,
-                posterUrl = movie.posterUrl,
-                name = movie.nameEn ?: movie.nameRu ?: "Unknown Name",
-                rating = movie.ratingKinopoisk,
-                genre = movie.genres.get(0).genre,
+            val watchedMovie = WatchedMovie(
+                movieId = movie.kinopoiskId ,
+                posterUrl = movie.posterUrl ,
+                name = movie.nameEn ,
+                rating = movie.ratingKinopoisk ,
+                genre = movie.genres[0].genre ,
                 visitedAt = System.currentTimeMillis()
             )
-            Log.d("INSERT", "insertMovieToWatched: "+ watchedMovie)
+            Log.d("INSERT" , "insertMovieToWatched: $watchedMovie")
             watchedMovieDao.insert(watchedMovie)
             _isWatched.value = true
         }
     }
 
+    /**
+     * Removes movie from watched history.
+     *
+     * @param id Movie identifier.
+     */
     fun deleteMovieFromWatched(id: Int) {
         viewModelScope.launch {
             watchedMovieDao.deleteById(id)
             _isWatched.value = false
-            Log.d("DELETE", "id: " + id)
+            Log.d("DELETE" , "id: $id")
         }
     }
-
 }

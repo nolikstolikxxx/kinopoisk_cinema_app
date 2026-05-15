@@ -94,11 +94,18 @@ class MovieRepositoryImpl @Inject constructor(
         return api.getActors(filmId)
     }
 
-    /*override suspend fun getActorsById(
+    /**
+     * Loads actor details by ID.
+     *
+     * @param id Actor identifier.
+     *
+     * @return Actors object.
+     */
+    override suspend fun getActorsById(
         id: Int,
     ): Actors {
         return api.getActorsById(id)
-    }*/
+    }
 
     // ================================
     // Similar Movies
