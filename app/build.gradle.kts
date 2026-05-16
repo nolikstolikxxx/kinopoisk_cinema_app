@@ -1,8 +1,3 @@
-
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import java.lang.module.ModuleFinder.compose
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -124,13 +119,31 @@ dependencies {
         exclude group: "io.opentelemetry", module: 'opentelemetry-exporter-otlp"
     }*/
 
-
+    // Unit Test
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    testImplementation(libs.truth)
+
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockito.core)
+
+    testImplementation(libs.mockito.kotlin)
     // Compose
     testImplementation(libs.androidx.paging.common)
 
+    // Android Test
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    androidTestImplementation(libs.androidx.core)
+
+    androidTestImplementation(libs.androidx.room.testing)
+
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+
+    androidTestImplementation(libs.truth)
 
 
 }

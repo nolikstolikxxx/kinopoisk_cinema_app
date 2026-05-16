@@ -6,5 +6,5 @@ data class StaffDetailMovieState(
     var isLoading: Boolean = false ,
     var staffName: String = "" ,
     var staffMovies: List<Movie> = emptyList() ,
-    var error: String = ""
+    var error: String? = ""
 )

@@ -56,10 +56,10 @@ fun StaffDetailScreen(
                 modifier = Modifier.align(Alignment.Center)
             )
 
-        } else if ( state.error.isNotBlank() ) {
+        } else if ( !state.error.isNullOrBlank() ) {
 
             Text(
-                text = state.error,
+                text = state.error ?: "Unexpected error occurred",
                 modifier = Modifier
                     .align(Alignment.Center)
             )

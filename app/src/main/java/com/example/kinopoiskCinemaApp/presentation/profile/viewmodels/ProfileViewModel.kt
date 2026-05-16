@@ -72,7 +72,7 @@ class ProfileViewModel @Inject constructor(
                     movies = movies ,
                 )
 
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _watchedMoviesState.value = _watchedMoviesState.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"

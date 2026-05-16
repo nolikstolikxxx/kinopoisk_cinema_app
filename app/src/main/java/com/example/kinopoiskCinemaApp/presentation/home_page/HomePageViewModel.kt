@@ -66,7 +66,7 @@ class HomePageViewModel @Inject constructor(
                 val movies = movieUseCase.getAllFilms()
                 _state.value = _state.value.copy(isLoading = false , movies = movies)
 
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _state.value = _state.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"

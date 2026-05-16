@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import javax.inject.Inject
 
 /**
@@ -94,8 +93,9 @@ class StaffDetailMovieViewModel @Inject constructor(
                     staffMovies = staffMovies
                 )
 
-            } catch (e: HttpException) {
-                _state.value = StaffDetailMovieState(error = e.message())
+            } catch (e: Exception) {
+                _state.value = StaffDetailMovieState(
+                    error = e.message ?: "Unexpected error occurred")
             }
         }
 

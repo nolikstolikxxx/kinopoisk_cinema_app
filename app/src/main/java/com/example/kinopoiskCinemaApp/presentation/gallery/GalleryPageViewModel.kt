@@ -72,7 +72,7 @@ class GalleryPageViewModel @Inject constructor(
                     isLoading = false ,
                     gallery = gallery
                 )
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _state.value = _state.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"

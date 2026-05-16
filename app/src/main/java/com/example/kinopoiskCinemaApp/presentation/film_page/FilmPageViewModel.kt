@@ -125,7 +125,7 @@ class FilmPageViewModel @Inject constructor(
                     isLoading = false ,
                     movie = movie ,
                 )
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _stateMovie.value = _stateMovie.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
@@ -154,7 +154,7 @@ class FilmPageViewModel @Inject constructor(
                     isLoading = false ,
                     actor = actors
                 )
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _stateActors.value = _stateActors.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
@@ -183,7 +183,7 @@ class FilmPageViewModel @Inject constructor(
                     isLoading = false ,
                     gallary = gallery
                 )
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _stateGallery.value = _stateGallery.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
@@ -212,7 +212,7 @@ class FilmPageViewModel @Inject constructor(
                     isLoading = false ,
                     movies = movie
                 )
-            } catch (e: HttpException) {
+            } catch (e: Exception) {
                 _stateSimilarFilm.value = _stateSimilarFilm.value.copy(
                     isLoading = false ,
                     error = e.localizedMessage ?: "An unexpected error occurred"
