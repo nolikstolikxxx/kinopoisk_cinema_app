@@ -33,6 +33,17 @@ fun HomePageScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    HomePageContent(
+        state = state ,
+        navController = navController
+    )
+}
+
+@Composable
+fun HomePageContent(
+    state: HomePageState ,
+    navController: NavController? = null
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -69,11 +80,13 @@ fun HomePageScreen(
                 ) {
                     items(state.movies.toList()) { (key , value) ->
 
-                        GenreAndAllModel(
-                            text = convertCollectionType(key) ,
-                            navPath = "movieCollection/${key}" ,
-                            navController = navController
-                        )
+                        navController?.let {
+                            GenreAndAllModel(
+                                text = convertCollectionType(key),
+                                navPath = "movieCollection/${key}",
+                                navController = it
+                            )
+                        }
                         LazyRow(
                             modifier = Modifier.padding(bottom = 16.dp) ,
                             horizontalArrangement = Arrangement.spacedBy(9.dp)
@@ -83,7 +96,7 @@ fun HomePageScreen(
                                     movie = mov ,
                                     onItemClick = {
                                         navController
-                                            .navigate("detailMovie/${mov.kinopoiskId}")
+                                            ?.navigate("detailMovie/${mov.kinopoiskId}")
                                     }
                                 )
                             }

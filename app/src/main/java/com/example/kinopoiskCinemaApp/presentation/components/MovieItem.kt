@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.ui.platform.testTag
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,20 +34,21 @@ fun MovieItem(
 ) {
     Box(
         modifier = Modifier
+            .testTag("movie_item")
             .fillMaxWidth()
             .width(111.dp)
             .height(194.dp)
             .background(
-                color = Color.White,
+                color = Color.White ,
                 shape = RoundedCornerShape(22.dp)
             )
             .clickable { onItemClick() }
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
         ) {
-            Box (
+            Box(
                 modifier = Modifier
                     .clickable { onItemClick() }
             ) {
@@ -54,22 +56,22 @@ fun MovieItem(
                     modifier = Modifier
                         .clip(RoundedCornerShape(5.dp))
                         .width(111.dp)
-                        .height(156.dp),
-                    model = movie.posterUrl,
+                        .height(156.dp) ,
+                    model = movie.posterUrl ,
                     placeholder = painterResource(id = R.drawable.img) ,
                     error = painterResource(id = R.drawable.img) ,
-                    contentDescription = "Movie poster",
+                    contentDescription = "Movie poster" ,
                 )
 
                 Text(
-                    text = movie.ratingKinopoisk.toString(),
-                    fontSize = 8.sp,
-                    fontWeight = FontWeight.Bold,
+                    text = movie.ratingKinopoisk.toString() ,
+                    fontSize = 8.sp ,
+                    fontWeight = FontWeight.Bold ,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(4.dp)
                         .background(Color(0xFF3D3BFF) , shape = RoundedCornerShape(6.dp))
-                        .padding(horizontal = 6.dp),
+                        .padding(horizontal = 6.dp) ,
                     color = Color.White
                 )
             }
@@ -77,21 +79,21 @@ fun MovieItem(
             Text(
                 modifier = Modifier
                     .padding(top = 2.dp)
-                    .widthIn(max = 108.dp),
-                text = movie.nameRu,
+                    .widthIn(max = 108.dp) ,
+                text = movie.nameRu ,
                 style = TextStyle(
-                    fontWeight = FontWeight.W400,
-                    fontSize = 12.sp,
+                    fontWeight = FontWeight.W400 ,
+                    fontSize = 12.sp ,
                     color = Color.Black
                 ) ,
-                maxLines = 1,
+                maxLines = 1 ,
                 overflow = TextOverflow.Ellipsis
             )
 
             Text(
-                text = movie.genres.get(0).genre,
+                text = movie.genres[0].genre ,
                 style = TextStyle(
-                    fontSize = 10.sp,
+                    fontSize = 10.sp ,
                     color = Color.Gray
                 )
             )

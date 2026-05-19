@@ -156,5 +156,6 @@ class HomePageViewModelTest {
 
         assertThat(state.isLoading).isFalse()
         assertThat(state.movies).isEmpty()
+        assertThat(state.error).isNotEmpty()
     }
 }

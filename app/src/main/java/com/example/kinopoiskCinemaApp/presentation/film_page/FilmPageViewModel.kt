@@ -90,7 +90,6 @@ class FilmPageViewModel @Inject constructor(
 
     init {
         val id: Int? = savedStateHandle.get<String>("id")?.toInt()
-        Log.d("id" , id.toString())
 
         if (id != null) {
             getMovieById(id)
@@ -240,7 +239,7 @@ class FilmPageViewModel @Inject constructor(
                 genre = movie.genres[0].genre ,
                 visitedAt = System.currentTimeMillis()
             )
-            Log.d("INSERT" , "insertMovieToWatched: $watchedMovie")
+
             watchedMovieDao.insert(watchedMovie)
             _isWatched.value = true
         }
@@ -255,7 +254,6 @@ class FilmPageViewModel @Inject constructor(
         viewModelScope.launch {
             watchedMovieDao.deleteById(id)
             _isWatched.value = false
-            Log.d("DELETE" , "id: $id")
         }
     }
 }

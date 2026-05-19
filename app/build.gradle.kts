@@ -80,6 +80,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(libs.androidx.concurrent.futures)
+    implementation(libs.concurrent.futures.ktx)
 
     // Compose
     implementation(libs.androidx.animation)
@@ -129,6 +131,7 @@ dependencies {
     testImplementation(libs.mockito.core)
 
     testImplementation(libs.mockito.kotlin)
+
     // Compose
     testImplementation(libs.androidx.paging.common)
 
@@ -144,6 +147,12 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.truth)
+
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
 
 }
